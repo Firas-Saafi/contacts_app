@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: MediaQuery.of(context).size.width * .7,
               child: OutlinedButton(
                   onPressed: () {
-                    /* AuthService().continueWithGoogle().then((value) {
+                    AuthService().continueWithGoogle().then((value) {
                       if (value == "Connexion réussie avec Google") {
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("Connexion réussie avec Google")));
@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           backgroundColor: Colors.green.shade400,
                         ));
                       }
-                    }); */
+                    });
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text("Vous n'avez pas de compte ?"),
                 TextButton(
                     onPressed: () {
-                      /* Navigator.pushNamed(context, "/signup"); */
+                      Navigator.pushNamed(context, "/signup");
                     },
                     child: Text("S'inscrire"))
               ],
