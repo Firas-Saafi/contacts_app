@@ -11,7 +11,6 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
@@ -43,25 +42,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               style:
                   GoogleFonts.sora(fontSize: 32, fontWeight: FontWeight.w700),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-                width: MediaQuery.of(context).size.width * .9,
-                child: TextFormField(
-                  validator: (value) =>
-                      value!.isEmpty ? "Le Nom ne peut pas être vide." : null,
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey[200], 
-                    label: Text("Nom"),
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                )),
             SizedBox(
               height: 10,
             ),
@@ -161,7 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (formKey.currentState!.validate()) {
                         AuthService()
                             .createAccountWithEmail(
-                                _nameController.text, _emailController.text, _passwordController.text)
+                                _emailController.text, _passwordController.text)
                             .then((value) {
                           if (value == "Compte créé avec succès") {
                             ScaffoldMessenger.of(context).showSnackBar(
