@@ -1,51 +1,58 @@
-import 'package:contacts_app/services/firestore_services.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';  // Importe le package Flutter
+import 'package:contacts_app/services/firestore_services.dart';  // Importe services Firestore 
 
-class AddContact extends StatefulWidget {
-  const AddContact({super.key});
+class AddContact extends StatefulWidget {   // Class Page AddContact
+  const AddContact({super.key});   // Constructeur de la classe AddContact
 
   @override
   State<AddContact> createState() => _AddContactState();
 }
 
+// Classe pour gérer l'état de la page 
 class _AddContactState extends State<AddContact> {
+  // Contrôleurs pour les champs
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();  // Clé globale pour le formulaire
   @override
   Widget build(BuildContext context) {
+     // Structure de la page
     return Scaffold(
-      appBar: AppBar(title: Text("Ajouter Contact")),
+      appBar: AppBar(title: Text("Ajouter Contact")),   // Titre de la barre d'application
+      // Corps de la page
       body: SingleChildScrollView(
         child: Form(
-          key: formKey,
+          key: formKey,  // Clé globale du formulaire
           child: Center(
             child: Column(
               children: [
+                // Espacement vertical
                 SizedBox(
                   height: 20,
                 ),
-                Image.asset(
-                  "images/Contacts.png",
-                  height: 120,
-                  width: 120,
+                // Image
+                Image.asset(  
+                  "images/Contacts.png",  // Path de Image 
+                  height: 120,  // Hauteur
+                  width: 120,   // Largeur
                 ),
+                // Espacement vertical
                 SizedBox(
                   height: 30,
                 ) ,     
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * .9,
-                  child: TextFormField(
+                  width: MediaQuery.of(context).size.width * .9,  // largeur du champ 
+                  child: TextFormField(  // widget pour la saisie de texte
                     validator: (value) =>
-                    value!.isEmpty ? "Veillez remplir le nom" : null,
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
+                    value!.isEmpty ? "Veillez remplir le nom" : null,  // Validation de champ 
+                    controller: _nameController,  // Contrôleur pour récupérer la valeur saisie 
+                    decoration: InputDecoration(  // Décoration du champ
+                      border: OutlineInputBorder(  // Border 
                         borderRadius: BorderRadius.circular(15.0),
                       ),
-                      label: Text("Nom"),
-                      prefixIcon: Icon(Icons.person),
+                      label: Text("Nom"),  // Étiquette du champ
+                      prefixIcon: Icon(Icons.person),  // Icône du  champ
                     ),
                   )
                 ),
@@ -88,19 +95,20 @@ class _AddContactState extends State<AddContact> {
                   height: 30,
                 ),
                 SizedBox(
-                  height: 65,
-                  width: MediaQuery.of(context).size.width * .7,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
+                  height: 65,  // Hauteur du bouton 
+                  width: MediaQuery.of(context).size.width * .7,  // Largeur du bouton
+                  child: ElevatedButton(  // Utilise un ElevatedButton 
+                    onPressed: () {  // Action lorsque en appui sur le bouton 
+                      if (formKey.currentState!.validate()) {   // Vérifie la validité du formulaire 
+                        // Appel de la méthode pour ajouter le contact
                         CRUD().addNewContacts(_nameController.text,
                           _phoneController.text, _emailController.text);
-                          Navigator.pop(context);
+                          Navigator.pop(context);  // Retour à l'écran précédent après ajout
                       }
                     },
                     child: Text(
-                      "Ajouter",
-                      style: TextStyle(fontSize: 16),
+                      "Ajouter",  // Texte affiché sur le bouton
+                      style: TextStyle(fontSize: 16),  // Style du texte
                     ),
                   )
                 ),
